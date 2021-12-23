@@ -9,7 +9,7 @@ contract Airdrop is Ownable {
 
     address public tokenAddr;
 
-    event EtherTransfer(address beneficiary, uint amount);
+    event BSCTransfer(address beneficiary, uint amount);
 
     constructor(address _tokenAddr) public {
         tokenAddr = _tokenAddr;
@@ -25,7 +25,7 @@ contract Airdrop is Ownable {
         return true;
     }
 
-    function dropEther(address[] memory _recipients, uint256[] memory _amount) public payable onlyOwner returns (bool) {
+    function dropBSC(address[] memory _recipients, uint256[] memory _amount) public payable onlyOwner returns (bool) {
         uint total = 0;
 
         for(uint j = 0; j < _amount.length; j++) {
@@ -41,7 +41,7 @@ contract Airdrop is Ownable {
 
             payable(_recipients[i]).transfer(_amount[i]);
 
-            emit EtherTransfer(_recipients[i], _amount[i]);
+            emit BSCTransfer(_recipients[i], _amount[i]);
         }
 
         return true;
@@ -55,7 +55,7 @@ contract Airdrop is Ownable {
         require(Token(tokenAddr).transfer(beneficiary, Token(tokenAddr).balanceOf(address(this))));
     }
 
-    function withdrawEther(address payable beneficiary) public onlyOwner {
+    function withdrawBSC(address payable beneficiary) public onlyOwner {
         beneficiary.transfer(address(this).balance);
     }
 }
