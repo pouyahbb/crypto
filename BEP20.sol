@@ -1,4 +1,4 @@
-pragma solidity >=0.8.2;
+pragma solidity >=0.7.0;
 
 contract Token {
     mapping(address => uint) public balances;
